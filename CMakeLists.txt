@@ -36,3 +36,6 @@ install(
 
 # Documentation
 add_subdirectory(doc)
+
+# Examples
+add_subdirectory(examples)

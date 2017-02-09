@@ -1,0 +1,8 @@
+add_executable(comp-arch computer_architecture.cpp)
+target_link_libraries(comp-arch strong-types)
+set_target_properties(
+  comp-arch PROPERTIES
+  CXX_STANDARD 11
+  CXX_STANDARD_REQUIRED ON
+)
+
