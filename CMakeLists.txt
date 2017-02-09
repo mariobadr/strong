@@ -9,3 +9,20 @@ project(
   LANGUAGES CXX
   )
 
+add_library(${STRONG_TYPES} INTERFACE)
+
+target_sources(
+  ${STRONG_TYPES}
+  INTERFACE include/strong_types.hpp
+)
+
+target_include_directories(
+  ${STRONG_TYPES}
+  INTERFACE include
+)
+
+install(
+  FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/strong_types.hpp
+  DESTINATION include
+)
+
