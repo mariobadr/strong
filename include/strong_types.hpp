@@ -1,6 +1,8 @@
 #ifndef STRONG_TYPES_STRONG_TYPES_HPP
 #define STRONG_TYPES_STRONG_TYPES_HPP
 
+#include <type_traits>
+
 /**
  * Namespace for creating strong typedefs.
  */
