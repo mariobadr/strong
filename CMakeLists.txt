@@ -9,6 +9,14 @@ project(
   LANGUAGES CXX
   )
 
+# Potential build options
+option(
+  STRONG_TYPES_BUILD_DOCS
+  "Create HTML/PDF documentation (requires Doxygen)"
+  OFF
+)
+
+# Header-only library
 add_library(${STRONG_TYPES} INTERFACE)
 
 target_sources(
@@ -26,3 +34,5 @@ install(
   DESTINATION include
 )
 
+# Documentation
+add_subdirectory(doc)
