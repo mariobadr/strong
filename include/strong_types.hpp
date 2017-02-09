@@ -35,7 +35,7 @@ public:
   }
 
   /**
-   * Copy constructor.
+   * Initialize the underlying value via a copy or move.
    *
    * @param v The value to copy.
    */
