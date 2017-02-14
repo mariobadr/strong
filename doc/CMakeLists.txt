@@ -1,7 +1,7 @@
 # add a target to generate API documentation with Doxygen
 find_package(Doxygen)
 
-if(STRONG_TYPES_BUILD_DOCS)
+if(STRONG_BUILD_DOCS)
   if(NOT DOXYGEN_FOUND)
     message(FATAL_ERROR "Doxygen is needed to build the documentation.")
   endif()
