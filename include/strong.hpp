@@ -1,12 +1,12 @@
-#ifndef STRONG_TYPES_STRONG_TYPES_HPP
-#define STRONG_TYPES_STRONG_TYPES_HPP
+#ifndef STRONG_STRONG_HPP
+#define STRONG_STRONG_HPP
 
 #include <type_traits>
 
 /**
  * Namespace for creating strong typedefs.
  */
-namespace strong_types {
+namespace strong {
 
 /**
  * A strong typedef wrapper around some Type.
@@ -82,4 +82,4 @@ private:
 
 }
 
-#endif //STRONG_TYPES_STRONG_TYPES_HPP
+#endif //STRONG_STRONG_HPP

@@ -1,36 +1,36 @@
 cmake_minimum_required(VERSION 3.1)
 
-set(STRONG_TYPES "strong-types")
-set(STRONG_TYPES_DESCRIPTION "A Library for Strong Typedefs")
+set(STRONG "strong")
+set(STRONG_DESCRIPTION "A Library for Strong (aka Opaque) Typedefs")
 
 project(
-  ${STRONG_TYPES}
+  ${STRONG}
   VERSION 0.1.0.0
   LANGUAGES CXX
   )
 
 # Potential build options
 option(
-  STRONG_TYPES_BUILD_DOCS
+  STRONG_BUILD_DOCS
   "Create HTML/PDF documentation (requires Doxygen)"
   OFF
 )
 
 # Header-only library
-add_library(${STRONG_TYPES} INTERFACE)
+add_library(${STRONG} INTERFACE)
 
 target_sources(
-  ${STRONG_TYPES}
-  INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include/strong_types.hpp
+  ${STRONG}
+  INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include/strong.hpp
 )
 
 target_include_directories(
-  ${STRONG_TYPES}
+  ${STRONG}
   INTERFACE include
 )
 
 install(
-  FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/strong_types.hpp
+  FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/strong.hpp
   DESTINATION include
 )
 
