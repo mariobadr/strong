@@ -100,40 +100,95 @@ using underlying_type = decltype(detail::dummy_function(std::declval<Typedef>())
  */
 namespace op {
 
-template<class Typedef, typename Result = bool>
+/**
+ * Tests for equality or inequality between identical strong types.
+ *
+ * @tparam Tag The strong typedef to compare.
+ * @tparam Result The return type of the comparison
+ */
+template<class Tag, typename Result = bool>
 class equality {
 public:
-  friend constexpr Result operator==(Typedef const &lhs, Typedef const &rhs) {
-    using type = underlying_type<Typedef>;
+  /**
+   * Test for equality.
+   *
+   * @param lhs The left-hand side of the relational expression.
+   * @param rhs The right-hand side of the relational expression.
+   * @return The result of the comparison.
+   */
+  friend constexpr Result operator==(Tag const &lhs, Tag const &rhs) {
+    using type = underlying_type<Tag>;
     return static_cast<type const &>(lhs) == static_cast<type const &>(rhs);
   }
 
-  friend constexpr Result operator!=(Typedef const &lhs, Typedef const &rhs) {
+  /**
+   * Test for inequality.
+   *
+   * @param lhs The left-hand side of the relational expression.
+   * @param rhs The right-hand side of the relational expression.
+   * @return The result of the comparison.
+   */
+  friend constexpr Result operator!=(Tag const &lhs, Tag const &rhs) {
     return !(lhs == rhs);
   }
 };
 
-template<class Typedef, typename OtherType = Typedef, typename Result = bool>
+/**
+ * Tests for equality or inequality between different strong types.
+ *
+ * @tparam Tag The strong typedef to compare.
+ * @tparam OtherTag The other strong typedef to compare.
+ * @tparam Result The return type of the comparison
+ */
+template<class Tag, typename OtherTag, typename Result = bool>
 class mixed_equality {
 public:
-  friend constexpr Result operator==(Typedef const &lhs, OtherType const &rhs)
+  /**
+   * Test for equality.
+   *
+   * @param lhs The left-hand side of the relational expression.
+   * @param rhs The right-hand side of the relational expression.
+   * @return The result of the comparison.
+   */
+  friend constexpr Result operator==(Tag const &lhs, OtherTag const &rhs)
   {
-    using type = underlying_type<Typedef>;
+    using type = underlying_type<Tag>;
     return static_cast<type const &>(lhs) == static_cast<type const &>(rhs);
   }
 
-  friend constexpr Result operator!=(Typedef const &lhs, OtherType const &rhs)
+  /**
+   * Test for inequality.
+   *
+   * @param lhs The left-hand side of the relational expression.
+   * @param rhs The right-hand side of the relational expression.
+   * @return The result of the comparison.
+   */
+  friend constexpr Result operator!=(Tag const &lhs, OtherTag const &rhs)
   {
     return !(lhs == rhs);
   }
 
-  friend constexpr Result operator==(OtherType const &lhs, Typedef const &rhs)
+  /**
+   * Test for equality.
+   *
+   * @param lhs The left-hand side of the relational expression.
+   * @param rhs The right-hand side of the relational expression.
+   * @return The result of the comparison.
+   */
+  friend constexpr Result operator==(OtherTag const &lhs, Tag const &rhs)
   {
-    using type = underlying_type<Typedef>;
+    using type = underlying_type<Tag>;
     return static_cast<type const &>(lhs) == static_cast<type const &>(rhs);
   }
 
-  friend constexpr Result operator!=(OtherType const &lhs, Typedef const &rhs)
+  /**
+   * Test for inequality.
+   *
+   * @param lhs The left-hand side of the relational expression.
+   * @param rhs The right-hand side of the relational expression.
+   * @return The result of the comparison.
+   */
+  friend constexpr Result operator!=(OtherTag const &lhs, Tag const &rhs)
   {
     return !(lhs == rhs);
   }
