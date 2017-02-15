@@ -29,9 +29,16 @@ constexpr period inverse(frequency const & hertz)
 
 int main() {
   cycle_count cycles(50);
-  instruction_count instructions(10000);
+
+  instruction_count to_be_moved_instructions(10000);
+  // call move constructor
+  instruction_count instructions = std::move(to_be_moved_instructions);
+
   frequency clock_rate(2.6);
-  period p = inverse(clock_rate);
+  period p1 = inverse(clock_rate);
+
+  // move construct from rvalue temporary
+  period p2 = inverse(frequency(3.2));
 
   return 0;
 }
