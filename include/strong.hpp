@@ -2,6 +2,7 @@
 #define STRONG_STRONG_HPP
 
 #include <type_traits>
+#include <utility>
 
 /**
  * Namespace for creating strong typedefs.
@@ -79,6 +80,65 @@ public:
 private:
   Type value;
 };
+
+namespace detail {
+/**
+ * A dummy function used to help determine the type of the underlying value of a strong typedef.
+ */
+template <class Tag, typename Type>
+Type dummy_function(type<Tag, Type>);
+}
+
+/**
+ * Determine the type of the underlying value of a strong typedef.
+ */
+template <class Typedef>
+using underlying_type = decltype(detail::dummy_function(std::declval<Typedef>()));
+
+/**
+ * Operations to enable on strong typedefs.
+ */
+namespace op {
+
+template<class Typedef, typename Result = bool>
+class equality {
+public:
+  friend constexpr Result operator==(Typedef const &lhs, Typedef const &rhs) {
+    using type = underlying_type<Typedef>;
+    return static_cast<type const &>(lhs) == static_cast<type const &>(rhs);
+  }
+
+  friend constexpr Result operator!=(Typedef const &lhs, Typedef const &rhs) {
+    return !(lhs == rhs);
+  }
+};
+
+template<class Typedef, typename OtherType = Typedef, typename Result = bool>
+class mixed_equality {
+public:
+  friend constexpr Result operator==(Typedef const &lhs, OtherType const &rhs)
+  {
+    using type = underlying_type<Typedef>;
+    return static_cast<type const &>(lhs) == static_cast<type const &>(rhs);
+  }
+
+  friend constexpr Result operator!=(Typedef const &lhs, OtherType const &rhs)
+  {
+    return !(lhs == rhs);
+  }
+
+  friend constexpr Result operator==(OtherType const &lhs, Typedef const &rhs)
+  {
+    using type = underlying_type<Typedef>;
+    return static_cast<type const &>(lhs) == static_cast<type const &>(rhs);
+  }
+
+  friend constexpr Result operator!=(OtherType const &lhs, Typedef const &rhs)
+  {
+    return !(lhs == rhs);
+  }
+};
+}
 
 }
 
