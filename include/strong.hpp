@@ -443,9 +443,21 @@ public:
 
 #ifdef STRONG_USE_STL_STREAMS
 
+/**
+ * Enables the output stream operator for the strong type.
+ *
+ * @tparam TypeName The name of the strong type.
+ */
 template<class TypeName>
 class outputs {
 public:
+  /**
+   * Output the value to the stream.
+   *
+   * @param stream The stream to modify.
+   * @param value The value to output.
+   * @return The modified stream.
+   */
   friend std::ostream & operator<<(std::ostream & stream, TypeName const &value)
   {
     stream << get(value);
@@ -453,9 +465,21 @@ public:
   }
 };
 
+/**
+ * Enables the input stream operator for the strong type.
+ *
+ * @tparam TypeName The name of the strong type.
+ */
 template<class TypeName>
 class inputs {
 public:
+  /**
+   * Extract a value from the stream and store it in the variable.
+   *
+   * @param stream The stream to extract from.
+   * @param value Stores the extracted value.
+   * @return The modified stream post-extraction.
+   */
   friend std::istream & operator>>(std::istream & stream, TypeName &value)
   {
     return stream >> get(value);
