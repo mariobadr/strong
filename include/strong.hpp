@@ -21,10 +21,10 @@ namespace strong {
  * but not implicitly converted. For more information please see:
  * http://en.cppreference.com/w/cpp/language/cast_operator
  *
- * @tparam Tag A unique identifier for this type
- * @tparam Type The actual type (e.g. int) to use
+ * @tparam TypeName A unique identifier for this type
+ * @tparam Type The underlying type (e.g. int) to use
  */
-template<class Tag, typename Type>
+template<class TypeName, typename Type>
 class type {
 public:
   /**
@@ -84,13 +84,13 @@ private:
 /**
  * Access the underlying value of the strong type.
  *
- * @tparam Tag The name of the strong typedef
+ * @tparam TypeName The name of the strong typedef
  * @tparam Type The underlying type of the strong typedef
  * @param object The instance of the strong type
  * @return A reference to the underlying value
  */
-template<class Tag, typename Type>
-constexpr Type const & get(type<Tag, Type> const &object) noexcept
+template<class TypeName, typename Type>
+constexpr Type const & get(type<TypeName, Type> const &object) noexcept
 {
   return static_cast<Type const &>(object);
 };
@@ -103,10 +103,10 @@ namespace op {
 /**
  * Enables testing for equality or inequality between identical strong types.
  *
- * @tparam Tag The strong typedef to compare.
+ * @tparam TypeName The strong typedef to compare.
  * @tparam Result The return type of the comparison
  */
-template<class Tag, typename Result = bool>
+template<class TypeName, typename Result = bool>
 class equals {
 public:
   /**
@@ -116,7 +116,7 @@ public:
    * @param rhs The right-hand side of the relational expression.
    * @return The result of the comparison.
    */
-  friend constexpr Result operator==(Tag const &lhs, Tag const &rhs)
+  friend constexpr Result operator==(TypeName const &lhs, TypeName const &rhs)
   {
     return get(lhs) == get(rhs);
   }
@@ -128,7 +128,7 @@ public:
    * @param rhs The right-hand side of the relational expression.
    * @return The result of the comparison.
    */
-  friend constexpr Result operator!=(Tag const &lhs, Tag const &rhs)
+  friend constexpr Result operator!=(TypeName const &lhs, TypeName const &rhs)
   {
     return !(lhs == rhs);
   }
@@ -137,10 +137,10 @@ public:
 /**
  * Enables testing for the less than and less than or equal to operators for strong types.
  *
- * @tparam Tag The strong typedef to compare.
+ * @tparam TypeName The strong typedef to compare.
  * @tparam Result The return type of the comparison
  */
-template<class Tag, typename Result = bool>
+template<class TypeName, typename Result = bool>
 class less {
 public:
   /**
@@ -150,7 +150,7 @@ public:
    * @param rhs The right-hand side of the relational expression.
    * @return The result of the comparison.
    */
-  friend constexpr Result operator<(Tag const &lhs, Tag const &rhs)
+  friend constexpr Result operator<(TypeName const &lhs, TypeName const &rhs)
   {
     return get(lhs) < get(rhs);
   }
@@ -162,7 +162,7 @@ public:
    * @param rhs The right-hand side of the relational expression.
    * @return The result of the comparison.
    */
-  friend constexpr Result operator<=(Tag const &lhs, Tag const &rhs)
+  friend constexpr Result operator<=(TypeName const &lhs, TypeName const &rhs)
   {
     return !(rhs < lhs);
   }
@@ -171,10 +171,10 @@ public:
 /**
  * Enables testing for the greater than and greater than or equal to operators for strong types.
  *
- * @tparam Tag The strong typedef to compare.
+ * @tparam TypeName The strong typedef to compare.
  * @tparam Result The return type of the comparison
  */
-template<class Tag, typename Result = bool>
+template<class TypeName, typename Result = bool>
 class greater {
 public:
   /**
@@ -184,7 +184,7 @@ public:
    * @param rhs The right-hand side of the relational expression.
    * @return The result of the comparison.
    */
-  friend constexpr Result operator>(Tag const &lhs, Tag const &rhs)
+  friend constexpr Result operator>(TypeName const &lhs, TypeName const &rhs)
   {
     return get(lhs) > get(rhs);
   }
@@ -196,7 +196,7 @@ public:
    * @param rhs The right-hand side of the relational expression.
    * @return The result of the comparison.
    */
-  friend constexpr Result operator>=(Tag const &lhs, Tag const &rhs)
+  friend constexpr Result operator>=(TypeName const &lhs, TypeName const &rhs)
   {
     return !(rhs > lhs);
   }
@@ -205,9 +205,9 @@ public:
 /**
  * Enables the addition of strong types.
  *
- * @tparam Tag The strong typedef to compare.
+ * @tparam TypeName The strong typedef to compare.
  */
-template<class Tag>
+template<class TypeName>
 class adds {
 public:
   /**
@@ -217,9 +217,9 @@ public:
    * @param rhs The right-hand side of the expression
    * @return The sum of the left- and right-hand side
    */
-  friend constexpr Tag operator+(Tag const &lhs, Tag const &rhs)
+  friend constexpr TypeName operator+(TypeName const &lhs, TypeName const &rhs)
   {
-    return Tag(get(lhs) + get(rhs));
+    return TypeName(get(lhs) + get(rhs));
   }
 };
 
