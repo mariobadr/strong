@@ -273,6 +273,40 @@ public:
     return lhs;
   }
 };
+
+/**
+ * Enables the multiplication of identical strong types.
+ *
+ * @tparam TypeName The strong typedef to multiply.
+ */
+template<class TypeName>
+class multiplication {
+public:
+  /**
+   * Multiply two strong types and return the result.
+   *
+   * @param lhs The left-hand side of the expression
+   * @param rhs The right-hand side of the expression
+   * @return The product of the left- and right-hand side
+   */
+  friend constexpr TypeName operator*(TypeName const &lhs, TypeName const &rhs)
+  {
+    return TypeName(get(lhs) - get(rhs));
+  }
+
+  /**
+   * Multiply the right-hand side to the left-hand side and store the result in the left-hand side.
+   *
+   * @param lhs The left-hand side of the expression
+   * @param rhs The right-hand side of the expression
+   * @return A reference to the product, which is the left-hand side
+   */
+  friend TypeName & operator*=(TypeName &lhs, TypeName const &rhs)
+  {
+    get(lhs) -= get(rhs);
+    return lhs;
+  }
+};
 }
 
 }
