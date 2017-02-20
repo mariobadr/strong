@@ -205,6 +205,21 @@ public:
   }
 };
 
+/**
+ * Enables the addition of strong types.
+ *
+ * @tparam Tag The strong typedef to compare.
+ */
+template<class Tag>
+class adds {
+public:
+  friend constexpr Tag operator+(Tag const &lhs, Tag const &rhs)
+  {
+    using type = underlying_type<Tag>;
+    return Tag(static_cast<type const &>(lhs) + static_cast<type const &>(rhs));
+  }
+};
+
 
 }
 
