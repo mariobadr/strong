@@ -82,7 +82,21 @@ private:
 };
 
 /**
- * Access the underlying value of the strong type.
+ * Access the underlying value of a mutable strong type.
+ *
+ * @tparam TypeName The name of the strong typedef
+ * @tparam Type The underlying type of the strong typedef
+ * @param object The instance of the strong type
+ * @return A reference to the underlying value
+ */
+template<class TypeName, typename Type>
+constexpr Type & get(type<TypeName, Type> &object) noexcept
+{
+  return static_cast<Type &>(object);
+};
+
+/**
+ * Access the underlying value of an immutable strong type.
  *
  * @tparam TypeName The name of the strong typedef
  * @tparam Type The underlying type of the strong typedef
@@ -94,6 +108,8 @@ constexpr Type const & get(type<TypeName, Type> const &object) noexcept
 {
   return static_cast<Type const &>(object);
 };
+
+
 
 /**
  * Operations to enable on strong typedefs.
@@ -221,6 +237,19 @@ public:
   {
     return TypeName(get(lhs) + get(rhs));
   }
+
+  /**
+   * Add the right-hand side to the left-hand side and store the result in the left-hand side.
+   *
+   * @param lhs The left-hand side of the expression
+   * @param rhs The right-hand side of the expression
+   * @return A reference to the summation, which is the left-hand side
+   */
+  friend TypeName & operator+=(TypeName &lhs, TypeName const &rhs)
+  {
+    get(lhs) += get(rhs);
+    return lhs;
+  }
 };
 
 /**
@@ -241,6 +270,19 @@ public:
   friend constexpr TypeName operator-(TypeName const &lhs, TypeName const &rhs)
   {
     return TypeName(get(lhs) - get(rhs));
+  }
+
+  /**
+   * Subtract the right-hand side to the left-hand side and store the result in the left-hand side.
+   *
+   * @param lhs The left-hand side of the expression
+   * @param rhs The right-hand side of the expression
+   * @return A reference to the difference, which is the left-hand side
+   */
+  friend TypeName & operator-=(TypeName &lhs, TypeName const &rhs)
+  {
+    get(lhs) -= get(rhs);
+    return lhs;
   }
 };
 

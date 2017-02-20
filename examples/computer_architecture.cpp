@@ -48,8 +48,11 @@ int main() {
   std::cout << (cycles == (cycle_count(35) + cycle_count(15))) << "\n";
 
   std::cout << get(cycles) << "\n";
-  auto const less_cycles = even_more_cycles - cycles;
-  std::cout << get(less_cycles - more_cycles + cycle_count(5)) << "\n";
+  auto less_cycles = even_more_cycles - cycles;
+  less_cycles += cycle_count(4);
+  std::cout << get(less_cycles - more_cycles + cycle_count(5)) << "\n"; // output 9
+  less_cycles -= cycle_count(3);
+  std::cout << get(less_cycles) << "\n"; // output 61
 
   instruction_count to_be_moved_instructions(10000);
   // call move constructor
