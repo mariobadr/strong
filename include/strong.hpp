@@ -210,6 +210,13 @@ public:
 template<class Tag>
 class adds {
 public:
+  /**
+   * Add two strong types and return the result.
+   *
+   * @param lhs The left-hand side of the expression
+   * @param rhs The right-hand side of the expression
+   * @return The sum of the left- and right-hand side
+   */
   friend constexpr Tag operator+(Tag const &lhs, Tag const &rhs)
   {
     return Tag(get(lhs) + get(rhs));
