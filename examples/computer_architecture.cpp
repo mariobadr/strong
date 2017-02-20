@@ -52,17 +52,29 @@ int main() {
   std::cout << (cycles > more_cycles) << "\n"; // output 0 (false)
   std::cout << (cycles >= cycle_count(50)) << "\n"; // output 1 (true)
   std::cout << (cycles == (cycle_count(35) + cycle_count(15))) << "\n"; // output 1 (true)
+#ifdef STRONG_USE_STL_STREAMS
   std::cout << cycles << "\n"; // output 50
+#else
+  std::cout << get(cycles) << "\n";
+#endif
 
   auto less_cycles = even_more_cycles - cycles;
   less_cycles += cycle_count(4);
+#ifdef STRONG_USE_STL_STREAMS
   std::cout << (less_cycles - more_cycles + cycle_count(5)) << "\n"; // output 9
+#else
+   std::cout << get(less_cycles - more_cycles + cycle_count(5)) << "\n"; // output 9
+#endif
 
   less_cycles -= cycle_count(3);
   ++less_cycles;
   less_cycles++;
   --less_cycles;
+#ifdef STRONG_USE_STL_STREAMS
   std::cout << less_cycles << "\n"; // output 62
+#else
+   std::cout << get(less_cycles) << "\n"; // output 62
+#endif
 
   instruction_count to_be_moved_instructions(10000);
   // call move constructor
