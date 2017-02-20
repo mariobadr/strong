@@ -170,6 +170,41 @@ public:
   }
 };
 
+/**
+ * Enables testing for the greater than and greater than or equal to operators for strong types.
+ *
+ * @tparam Tag The strong typedef to compare.
+ * @tparam Result The return type of the comparison
+ */
+template<class Tag, typename Result = bool>
+class greater {
+public:
+  /**
+   * Test that the left-hand side is greater than the right-hand side.
+   *
+   * @param lhs The left-hand side of the relational expression.
+   * @param rhs The right-hand side of the relational expression.
+   * @return The result of the comparison.
+   */
+  friend constexpr Result operator>(Tag const &lhs, Tag const &rhs)
+  {
+    using type = underlying_type<Tag>;
+    return static_cast<type const &>(lhs) > static_cast<type const &>(rhs);
+  }
+
+  /**
+   * Test that the left-hand side is greater than or equal to the right-hand side.
+   *
+   * @param lhs The left-hand side of the relational expression.
+   * @param rhs The right-hand side of the relational expression.
+   * @return The result of the comparison.
+   */
+  friend constexpr Result operator>=(Tag const &lhs, Tag const &rhs)
+  {
+    return !(rhs > lhs);
+  }
+};
+
 
 }
 

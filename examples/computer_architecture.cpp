@@ -6,7 +6,8 @@
 struct cycle_count
   : strong::type<cycle_count, int>
   , strong::op::equals<cycle_count>
-  , strong::op::less<cycle_count> {
+  , strong::op::less<cycle_count>
+  , strong::op::greater<cycle_count> {
   // inherit the base class's constructors
   using strong::type<cycle_count, int>::type;
 };
@@ -38,6 +39,8 @@ int main() {
 
   std::cout << (cycles == more_cycles) << "\n"; // output 0 (false)
   std::cout << (cycles < more_cycles) << "\n"; // output 1 (true)
+  std::cout << (cycles > more_cycles) << "\n"; // output 0 (false)
+  std::cout << (cycles >= cycle_count(50)) << "\n"; // output 1 (true)
 
   instruction_count to_be_moved_instructions(10000);
   // call move constructor
