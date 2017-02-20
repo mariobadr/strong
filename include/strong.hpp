@@ -117,13 +117,13 @@ constexpr Type const & get(type<TypeName, Type> const &object) noexcept
 namespace op {
 
 /**
- * Enables testing for equality or inequality between identical strong types.
+ * Enables comparisons for equality or inequality between identical strong types.
  *
  * @tparam TypeName The strong typedef to compare.
  * @tparam Result The return type of the comparison
  */
 template<class TypeName, typename Result = bool>
-class equals {
+class equality_comparison {
 public:
   /**
    * Test for equality.
@@ -151,13 +151,13 @@ public:
 };
 
 /**
- * Enables testing for the less than and less than or equal to operators for strong types.
+ * Enables comparisons to be made using <, <=, >, and >= operators between identical strong types.
  *
  * @tparam TypeName The strong typedef to compare.
  * @tparam Result The return type of the comparison
  */
 template<class TypeName, typename Result = bool>
-class less {
+class relational_comparison {
 public:
   /**
    * Test that the left-hand side is less than the right-hand side.
@@ -182,17 +182,7 @@ public:
   {
     return !(rhs < lhs);
   }
-};
 
-/**
- * Enables testing for the greater than and greater than or equal to operators for strong types.
- *
- * @tparam TypeName The strong typedef to compare.
- * @tparam Result The return type of the comparison
- */
-template<class TypeName, typename Result = bool>
-class greater {
-public:
   /**
    * Test that the left-hand side is greater than the right-hand side.
    *
@@ -219,12 +209,12 @@ public:
 };
 
 /**
- * Enables the addition of strong types.
+ * Enables the addition of identical strong types.
  *
  * @tparam TypeName The strong typedef to compare.
  */
 template<class TypeName>
-class adds {
+class addition {
 public:
   /**
    * Add two strong types and return the result.
@@ -253,12 +243,12 @@ public:
 };
 
 /**
- * Enables the subtraction of strong types.
+ * Enables the subtraction of identical strong types.
  *
  * @tparam TypeName The strong typedef to compare.
  */
 template<class TypeName>
-class subtracts {
+class subtraction {
 public:
   /**
    * Subtract two strong types and return the result.
