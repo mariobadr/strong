@@ -295,7 +295,7 @@ public:
   }
 
   /**
-   * Multiply the right-hand side to the left-hand side and store the result in the left-hand side.
+   * Multiply the right- and left-hand side and store the result in the left-hand side.
    *
    * @param lhs The left-hand side of the expression
    * @param rhs The right-hand side of the expression
