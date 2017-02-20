@@ -121,7 +121,7 @@ namespace op {
  * @tparam Result The return type of the comparison
  */
 template<class TypeName, typename Result = bool>
-class equality_comparison {
+class equals {
 public:
   /**
    * Test for equality.
@@ -155,7 +155,7 @@ public:
  * @tparam Result The return type of the comparison
  */
 template<class TypeName, typename Result = bool>
-class relational_comparison {
+class orders {
 public:
   /**
    * Test that the left-hand side is less than the right-hand side.
@@ -212,7 +212,7 @@ public:
  * @tparam TypeName The strong typedef to add.
  */
 template<class TypeName>
-class addition {
+class adds {
 public:
   /**
    * Add two strong types and return the result.
@@ -246,7 +246,7 @@ public:
  * @tparam TypeName The strong typedef to subtract.
  */
 template<class TypeName>
-class subtraction {
+class subtracts {
 public:
   /**
    * Subtract two strong types and return the result.
@@ -280,7 +280,7 @@ public:
  * @tparam TypeName The strong typedef to multiply.
  */
 template<class TypeName>
-class multiplication {
+class multiplies {
 public:
   /**
    * Multiply two strong types and return the result.
@@ -314,7 +314,7 @@ public:
  * @tparam TypeName The strong typedef to divide.
  */
 template<class TypeName>
-class division {
+class divides {
 public:
   /**
    * Divide two strong types and return the result.
@@ -369,7 +369,7 @@ public:
  * @tparam TypeName The strong typedef to increment
  */
 template<class TypeName>
-class increment {
+class increments {
 public:
   /**
    * Increment the object (pre-fix).
@@ -406,7 +406,7 @@ public:
  * @tparam TypeName The strong typedef to decrement
  */
 template<class TypeName>
-class decrement {
+class decrements {
 public:
   /**
    * Decrement the object (pre-fix).

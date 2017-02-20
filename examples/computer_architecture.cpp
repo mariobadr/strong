@@ -5,12 +5,12 @@
 // Create a type that counts number of cycles
 struct cycle_count
   : strong::type<cycle_count, int>
-  , strong::op::equality_comparison<cycle_count>
-  , strong::op::relational_comparison<cycle_count>
-  , strong::op::addition<cycle_count>
-  , strong::op::subtraction<cycle_count>
-  , strong::op::increment<cycle_count>
-  , strong::op::decrement<cycle_count> {
+  , strong::op::equals<cycle_count>
+  , strong::op::orders<cycle_count>
+  , strong::op::adds<cycle_count>
+  , strong::op::subtracts<cycle_count>
+  , strong::op::increments<cycle_count>
+  , strong::op::decrements<cycle_count> {
   // inherit the base class's constructors
   using strong::type<cycle_count, int>::type;
 };
