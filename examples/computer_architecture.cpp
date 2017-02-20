@@ -8,7 +8,8 @@ struct cycle_count
   , strong::op::equals<cycle_count>
   , strong::op::less<cycle_count>
   , strong::op::greater<cycle_count>
-  , strong::op::adds<cycle_count> {
+  , strong::op::adds<cycle_count>
+  , strong::op::subtracts<cycle_count> {
   // inherit the base class's constructors
   using strong::type<cycle_count, int>::type;
 };
@@ -35,9 +36,9 @@ constexpr period inverse(frequency const & hertz)
 }
 
 int main() {
-  cycle_count cycles(50);
-  cycle_count more_cycles(60);
-  cycle_count even_more_cycles = cycles + more_cycles;
+  cycle_count const cycles(50);
+  cycle_count const more_cycles(60);
+  cycle_count const even_more_cycles = cycles + more_cycles;
 
   std::cout << (cycles == more_cycles) << "\n"; // output 0 (false)
   std::cout << (cycles < more_cycles) << "\n"; // output 1 (true)
@@ -45,6 +46,10 @@ int main() {
   std::cout << (cycles > more_cycles) << "\n"; // output 0 (false)
   std::cout << (cycles >= cycle_count(50)) << "\n"; // output 1 (true)
   std::cout << (cycles == (cycle_count(35) + cycle_count(15))) << "\n";
+
+  std::cout << get(cycles) << "\n";
+  auto const less_cycles = even_more_cycles - cycles;
+  std::cout << get(less_cycles - more_cycles + cycle_count(5)) << "\n";
 
   instruction_count to_be_moved_instructions(10000);
   // call move constructor

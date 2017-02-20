@@ -223,6 +223,27 @@ public:
   }
 };
 
+/**
+ * Enables the subtraction of strong types.
+ *
+ * @tparam TypeName The strong typedef to compare.
+ */
+template<class TypeName>
+class subtracts {
+public:
+  /**
+   * Subtract two strong types and return the result.
+   *
+   * @param lhs The left-hand side of the expression
+   * @param rhs The right-hand side of the expression
+   * @return The difference of the left- and right-hand side
+   */
+  friend constexpr TypeName operator-(TypeName const &lhs, TypeName const &rhs)
+  {
+    return TypeName(get(lhs) - get(rhs));
+  }
+};
+
 
 }
 
