@@ -456,7 +456,7 @@ public:
 template<class TypeName>
 class inputs {
 public:
-  friend std::istream & operator>>(std::istream & stream, TypeName const &value)
+  friend std::istream & operator>>(std::istream & stream, TypeName &value)
   {
     return stream >> get(value);
   }
