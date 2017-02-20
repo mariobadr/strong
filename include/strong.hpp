@@ -81,19 +81,19 @@ private:
   Type value;
 };
 
-namespace detail {
 /**
- * A dummy function used to help determine the type of the underlying value of a strong typedef.
+ * Access the underlying value of the strong type.
+ *
+ * @tparam Tag The name of the strong typedef
+ * @tparam Type The underlying type of the strong typedef
+ * @param object The instance of the strong type
+ * @return A reference to the underlying value
  */
-template <class Tag, typename Type>
-Type dummy_function(type<Tag, Type>);
-}
-
-/**
- * Determine the type of the underlying value of a strong typedef.
- */
-template <class Typedef>
-using underlying_type = decltype(detail::dummy_function(std::declval<Typedef>()));
+template<class Tag, typename Type>
+constexpr Type const & get(type<Tag, Type> const &object) noexcept
+{
+  return static_cast<Type const &>(object);
+};
 
 /**
  * Operations to enable on strong typedefs.
@@ -118,8 +118,7 @@ public:
    */
   friend constexpr Result operator==(Tag const &lhs, Tag const &rhs)
   {
-    using type = underlying_type<Tag>;
-    return static_cast<type const &>(lhs) == static_cast<type const &>(rhs);
+    return get(lhs) == get(rhs);
   }
 
   /**
@@ -153,8 +152,7 @@ public:
    */
   friend constexpr Result operator<(Tag const &lhs, Tag const &rhs)
   {
-    using type = underlying_type<Tag>;
-    return static_cast<type const &>(lhs) < static_cast<type const &>(rhs);
+    return get(lhs) < get(rhs);
   }
 
   /**
@@ -188,8 +186,7 @@ public:
    */
   friend constexpr Result operator>(Tag const &lhs, Tag const &rhs)
   {
-    using type = underlying_type<Tag>;
-    return static_cast<type const &>(lhs) > static_cast<type const &>(rhs);
+    return get(lhs) > get(rhs);
   }
 
   /**
@@ -215,8 +212,7 @@ class adds {
 public:
   friend constexpr Tag operator+(Tag const &lhs, Tag const &rhs)
   {
-    using type = underlying_type<Tag>;
-    return Tag(static_cast<type const &>(lhs) + static_cast<type const &>(rhs));
+    return Tag(get(lhs) + get(rhs));
   }
 };
 
