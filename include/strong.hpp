@@ -341,6 +341,27 @@ public:
     return lhs;
   }
 };
+
+/**
+ * Enables the modulo of identical strong types.
+ *
+ * @tparam TypeName The strong typedef to apply the modulo operator to.
+ */
+template<class TypeName>
+class modulo {
+public:
+  /**
+   * Find the remainder after division of two strong types and return the result.
+   *
+   * @param lhs The left-hand side of the expression
+   * @param rhs The right-hand side of the expression
+   * @return The remainder after division of the left- with the right-hand side
+   */
+  friend constexpr TypeName operator%(TypeName const &lhs, TypeName const &rhs)
+  {
+    return TypeName(get(lhs) % get(rhs));
+  }
+};
 }
 
 }
