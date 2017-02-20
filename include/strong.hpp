@@ -307,6 +307,40 @@ public:
     return lhs;
   }
 };
+
+/**
+ * Enables the division of identical strong types.
+ *
+ * @tparam TypeName The strong typedef to divide.
+ */
+template<class TypeName>
+class division {
+public:
+  /**
+   * Divide two strong types and return the result.
+   *
+   * @param lhs The left-hand side of the expression
+   * @param rhs The right-hand side of the expression
+   * @return The division of the left- and right-hand side
+   */
+  friend constexpr TypeName operator/(TypeName const &lhs, TypeName const &rhs)
+  {
+    return TypeName(get(lhs) - get(rhs));
+  }
+
+  /**
+   * Divide the right- and left-hand side and store the result in the left-hand side.
+   *
+   * @param lhs The left-hand side of the expression
+   * @param rhs The right-hand side of the expression
+   * @return A reference to the division, which is the left-hand side
+   */
+  friend TypeName & operator/=(TypeName &lhs, TypeName const &rhs)
+  {
+    get(lhs) -= get(rhs);
+    return lhs;
+  }
+};
 }
 
 }
