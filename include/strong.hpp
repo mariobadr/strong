@@ -109,8 +109,6 @@ constexpr Type const & get(type<TypeName, Type> const &object) noexcept
   return static_cast<Type const &>(object);
 };
 
-
-
 /**
  * Operations to enable on strong typedefs.
  */
@@ -275,8 +273,6 @@ public:
     return lhs;
   }
 };
-
-
 }
 
 }
