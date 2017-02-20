@@ -116,7 +116,8 @@ public:
    * @param rhs The right-hand side of the relational expression.
    * @return The result of the comparison.
    */
-  friend constexpr Result operator==(Tag const &lhs, Tag const &rhs) {
+  friend constexpr Result operator==(Tag const &lhs, Tag const &rhs)
+  {
     using type = underlying_type<Tag>;
     return static_cast<type const &>(lhs) == static_cast<type const &>(rhs);
   }
@@ -128,7 +129,8 @@ public:
    * @param rhs The right-hand side of the relational expression.
    * @return The result of the comparison.
    */
-  friend constexpr Result operator!=(Tag const &lhs, Tag const &rhs) {
+  friend constexpr Result operator!=(Tag const &lhs, Tag const &rhs)
+  {
     return !(lhs == rhs);
   }
 };
