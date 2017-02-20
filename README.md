@@ -21,3 +21,26 @@ The aforementioned names, Kyle Markley and Jonathan Müller, each have their own
 This is a header-only library, so you can simply copy the header file into your project to use it.
 Alternatively, you can install it or add it as a subdirectory to your project and then use CMake.
 To use CMake, add the subdirectory and then use ``target_link_libraries`` with ``strong``.
+
+## Creating a strong type
+
+```C++
+#include <strong.hpp>
+#include <iostream>
+
+struct my_type : strong::type<my_type, int>
+{
+  // inherit the base class's constructors
+  using strong::type<my_type, int>::type;
+}
+
+int main()
+{
+  my_type test(52);
+  
+  // we can access the underlying value with the get function
+  std::cout << strong::get(test) << "\n";
+  
+  return 0;
+}
+```
