@@ -4,6 +4,10 @@
 #include <type_traits>
 #include <utility>
 
+#ifdef STRONG_USE_STL_STREAMS
+#include <iosfwd>
+#endif
+
 /**
  * Namespace for creating strong typedefs.
  */
@@ -436,6 +440,29 @@ public:
     return object;
   }
 };
+
+#ifdef STRONG_USE_STL_STREAMS
+
+template<class TypeName>
+class outputs {
+public:
+  friend std::ostream & operator<<(std::ostream & stream, TypeName const &value)
+  {
+    stream << get(value);
+    return stream;
+  }
+};
+
+template<class TypeName>
+class inputs {
+public:
+  friend std::istream & operator>>(std::istream & stream, TypeName const &value)
+  {
+    return stream >> get(value);
+  }
+};
+
+#endif
 }
 
 }

@@ -16,6 +16,12 @@ option(
   OFF
 )
 
+option(
+  STRONG_USE_STL_STREAMS
+  "Include and use the std::ostream and std::istream for stream operations"
+  ON
+)
+
 # Header-only library
 add_library(${STRONG} INTERFACE)
 
@@ -28,6 +34,13 @@ target_include_directories(
   ${STRONG}
   INTERFACE include
 )
+
+if(STRONG_USE_STL_STREAMS)
+  target_compile_definitions(
+    ${STRONG} INTERFACE
+    STRONG_USE_STL_STREAMS=1
+  )
+endif()
 
 install(
   FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/strong.hpp
