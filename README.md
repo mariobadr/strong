@@ -15,3 +15,9 @@ More motivation can be found in a [blog post](http://foonathan.net/blog/2016/10/
 I created this library to teach myself more about strong typedefs and how they are implemented in C++.
 I would not recommend using this library in its current form.
 The aforementioned names, Kyle Markley and Jonathan Müller, each have their own (more complete) libraries for strong typedefs that you can check out [here](https://sourceforge.net/projects/opaque-typedef/) and [here](https://github.com/foonathan/type_safe).
+
+## Using this library (compilation)
+
+This is a header-only library, so you can simply copy the header file into your project to use it.
+Alternatively, you can install it or add it as a subdirectory to your project and then use CMake.
+To use CMake, add the subdirectory and then use ``target_link_libraries`` with ``strong``.
