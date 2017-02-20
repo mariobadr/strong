@@ -31,7 +31,7 @@ struct period : strong::type<period, double> {
 // Calculate the period given a frequency
 constexpr period inverse(frequency const & hertz)
 {
-  return period(1.0 / static_cast<double>(hertz));
+  return period(1.0 / get(hertz));
 }
 
 int main() {
