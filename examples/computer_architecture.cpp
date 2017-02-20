@@ -3,7 +3,7 @@
 #include <iostream>
 
 // Create a type that counts number of cycles
-struct cycle_count : strong::type<cycle_count, int>, strong::op::equality<cycle_count> {
+struct cycle_count : strong::type<cycle_count, int>, strong::op::equals<cycle_count> {
   // inherit the base class's constructors
   using strong::type<cycle_count, int>::type;
 };

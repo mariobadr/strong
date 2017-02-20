@@ -107,7 +107,7 @@ namespace op {
  * @tparam Result The return type of the comparison
  */
 template<class Tag, typename Result = bool>
-class equality {
+class equals {
 public:
   /**
    * Test for equality.
