@@ -132,6 +132,37 @@ public:
     return !(lhs == rhs);
   }
 };
+
+template<class Tag, typename Result = bool>
+class less {
+public:
+  /**
+   * Test for equality.
+   *
+   * @param lhs The left-hand side of the relational expression.
+   * @param rhs The right-hand side of the relational expression.
+   * @return The result of the comparison.
+   */
+  friend constexpr Result operator<(Tag const &lhs, Tag const &rhs)
+  {
+    using type = underlying_type<Tag>;
+    return static_cast<type const &>(lhs) < static_cast<type const &>(rhs);
+  }
+
+  /**
+   * Test for inequality.
+   *
+   * @param lhs The left-hand side of the relational expression.
+   * @param rhs The right-hand side of the relational expression.
+   * @return The result of the comparison.
+   */
+  friend constexpr Result operator<=(Tag const &lhs, Tag const &rhs)
+  {
+    return !(rhs < lhs);
+  }
+};
+
+
 }
 
 }
