@@ -291,7 +291,7 @@ public:
    */
   friend constexpr TypeName operator*(TypeName const &lhs, TypeName const &rhs)
   {
-    return TypeName(get(lhs) - get(rhs));
+    return TypeName(get(lhs) * get(rhs));
   }
 
   /**
@@ -303,7 +303,7 @@ public:
    */
   friend TypeName & operator*=(TypeName &lhs, TypeName const &rhs)
   {
-    get(lhs) -= get(rhs);
+    get(lhs) *= get(rhs);
     return lhs;
   }
 };
@@ -325,7 +325,7 @@ public:
    */
   friend constexpr TypeName operator/(TypeName const &lhs, TypeName const &rhs)
   {
-    return TypeName(get(lhs) - get(rhs));
+    return TypeName(get(lhs) / get(rhs));
   }
 
   /**
@@ -337,7 +337,7 @@ public:
    */
   friend TypeName & operator/=(TypeName &lhs, TypeName const &rhs)
   {
-    get(lhs) -= get(rhs);
+    get(lhs) /= get(rhs);
     return lhs;
   }
 };
