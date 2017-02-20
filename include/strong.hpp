@@ -209,7 +209,7 @@ public:
 /**
  * Enables the addition of identical strong types.
  *
- * @tparam TypeName The strong typedef to compare.
+ * @tparam TypeName The strong typedef to add.
  */
 template<class TypeName>
 class addition {
@@ -243,7 +243,7 @@ public:
 /**
  * Enables the subtraction of identical strong types.
  *
- * @tparam TypeName The strong typedef to compare.
+ * @tparam TypeName The strong typedef to subtract.
  */
 template<class TypeName>
 class subtraction {
