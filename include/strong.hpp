@@ -362,6 +362,80 @@ public:
     return TypeName(get(lhs) % get(rhs));
   }
 };
+
+/**
+ * Enables the pre- and post-fix increment operators for TypeName.
+ *
+ * @tparam TypeName The strong typedef to increment
+ */
+template<class TypeName>
+class increment {
+public:
+  /**
+   * Increment the object (pre-fix).
+   *
+   * @return The object incremented by one.
+   */
+  TypeName & operator++()
+  {
+    // this is of type increment, which should also be of type TypeName (so we cast it)
+    auto & object = static_cast<TypeName &>(*this);
+    ++get(object);
+    return object;
+  }
+
+  /**
+   * Increment the object (post-fix).
+   *
+   * @return The object incremented by one.
+   */
+  TypeName operator++(int)
+  {
+    // reuse the pre-fix increment implementation
+    ++(*this);
+
+    // this is of type increment, which should also be of type TypeName (so we cast it)
+    auto & object = static_cast<TypeName &>(*this);
+    return object;
+  }
+};
+
+/**
+ * Enables the pre- and post-fix decrement operators for TypeName.
+ *
+ * @tparam TypeName The strong typedef to decrement
+ */
+template<class TypeName>
+class decrement {
+public:
+  /**
+   * Decrement the object (pre-fix).
+   *
+   * @return The object decremented by one.
+   */
+  TypeName & operator--()
+  {
+    // this is of type decrement, which should also be of type TypeName (so we cast it)
+    auto & object = static_cast<TypeName &>(*this);
+    --get(object);
+    return object;
+  }
+
+  /**
+   * Decrement the object (post-fix).
+   *
+   * @return The object decremented by one.
+   */
+  TypeName operator--(int)
+  {
+    // reuse the pre-fix increment implementation
+    --(*this);
+
+    // this is of type decrement, which should also be of type TypeName (so we cast it)
+    auto & object = static_cast<TypeName &>(*this);
+    return object;
+  }
+};
 }
 
 }

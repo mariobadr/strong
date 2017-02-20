@@ -8,7 +8,9 @@ struct cycle_count
   , strong::op::equality_comparison<cycle_count>
   , strong::op::relational_comparison<cycle_count>
   , strong::op::addition<cycle_count>
-  , strong::op::subtraction<cycle_count> {
+  , strong::op::subtraction<cycle_count>
+  , strong::op::increment<cycle_count>
+  , strong::op::decrement<cycle_count> {
   // inherit the base class's constructors
   using strong::type<cycle_count, int>::type;
 };
@@ -44,14 +46,18 @@ int main() {
   std::cout << (cycles <= even_more_cycles) << "\n"; // output 1 (true)
   std::cout << (cycles > more_cycles) << "\n"; // output 0 (false)
   std::cout << (cycles >= cycle_count(50)) << "\n"; // output 1 (true)
-  std::cout << (cycles == (cycle_count(35) + cycle_count(15))) << "\n";
+  std::cout << (cycles == (cycle_count(35) + cycle_count(15))) << "\n"; // output 1 (true)
+  std::cout << get(cycles) << "\n"; // output 50
 
-  std::cout << get(cycles) << "\n";
   auto less_cycles = even_more_cycles - cycles;
   less_cycles += cycle_count(4);
   std::cout << get(less_cycles - more_cycles + cycle_count(5)) << "\n"; // output 9
+
   less_cycles -= cycle_count(3);
-  std::cout << get(less_cycles) << "\n"; // output 61
+  ++less_cycles;
+  less_cycles++;
+  --less_cycles;
+  std::cout << get(less_cycles) << "\n"; // output 62
 
   instruction_count to_be_moved_instructions(10000);
   // call move constructor
