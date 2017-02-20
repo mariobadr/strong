@@ -5,7 +5,7 @@ set(STRONG_DESCRIPTION "A Library for Strong (aka Opaque) Typedefs")
 
 project(
   ${STRONG}
-  VERSION 0.1.0.0
+  VERSION 0.2.0.0
   LANGUAGES CXX
   )
 
