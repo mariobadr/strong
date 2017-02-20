@@ -101,7 +101,7 @@ using underlying_type = decltype(detail::dummy_function(std::declval<Typedef>())
 namespace op {
 
 /**
- * Tests for equality or inequality between identical strong types.
+ * Enables testing for equality or inequality between identical strong types.
  *
  * @tparam Tag The strong typedef to compare.
  * @tparam Result The return type of the comparison
@@ -135,11 +135,17 @@ public:
   }
 };
 
+/**
+ * Enables testing for the less than and less than or equal to operators for strong types.
+ *
+ * @tparam Tag The strong typedef to compare.
+ * @tparam Result The return type of the comparison
+ */
 template<class Tag, typename Result = bool>
 class less {
 public:
   /**
-   * Test for equality.
+   * Test that the left-hand side is less than the right-hand side.
    *
    * @param lhs The left-hand side of the relational expression.
    * @param rhs The right-hand side of the relational expression.
@@ -152,7 +158,7 @@ public:
   }
 
   /**
-   * Test for inequality.
+   * Test that the left-hand side is less than or equal to the right-hand side.
    *
    * @param lhs The left-hand side of the relational expression.
    * @param rhs The right-hand side of the relational expression.
