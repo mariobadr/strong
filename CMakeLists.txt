@@ -1,10 +1,7 @@
-cmake_minimum_required(VERSION 3.1)
-
-set(STRONG "strong")
-set(STRONG_DESCRIPTION "A Library for Strong (aka Opaque) Typedefs")
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
 project(
-  ${STRONG}
+  strong
   VERSION 0.2.0.0
   LANGUAGES CXX
   )
@@ -23,21 +20,21 @@ option(
 )
 
 # Header-only library
-add_library(${STRONG} INTERFACE)
+add_library(${PROJECT_NAME} INTERFACE)
 
 target_sources(
-  ${STRONG}
+  ${PROJECT_NAME}
   INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include/strong.hpp
 )
 
 target_include_directories(
-  ${STRONG}
+  ${PROJECT_NAME}
   INTERFACE include
 )
 
 if(STRONG_USE_STL_STREAMS)
   target_compile_definitions(
-    ${STRONG} INTERFACE
+    ${PROJECT_NAME} INTERFACE
     STRONG_USE_STL_STREAMS=1
   )
 endif()
