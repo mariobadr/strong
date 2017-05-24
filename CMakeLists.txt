@@ -6,18 +6,8 @@ project(
   LANGUAGES CXX
   )
 
-# Potential build options
-option(
-  STRONG_BUILD_DOCS
-  "Create HTML/PDF documentation (requires Doxygen)"
-  OFF
-)
-
-option(
-  STRONG_USE_STL_STREAMS
-  "Include and use the std::ostream and std::istream for stream operations"
-  ON
-)
+# Build options
+include(options.cmake)
 
 # Header-only library
 add_library(${PROJECT_NAME} INTERFACE)
