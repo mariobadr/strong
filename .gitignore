@@ -30,6 +30,7 @@
 
 # Build directories
 build*
+cmake-build*
 
 # CLion
 .idea
